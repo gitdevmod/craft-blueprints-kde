@@ -44,3 +44,10 @@ class subinfo(info.infoclass):
 class Package(CMakePackageBase):
     def __init__(self):
         CMakePackageBase.__init__(self)
+
+    def createPackage(self):
+        self.defines["appname"] = "tellico"
+        self.defines["website"] = "https://tellico-project.org/"
+        self.defines["executable"] = "bin\\tellico.exe"
+        
+        return TypePackager.createPackage(self)
