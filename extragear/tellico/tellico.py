@@ -7,7 +7,6 @@ class subinfo(info.infoclass):
             self.targets[ver] = 'https://tellico-project.org/files/tellico-' + ver + '.tar.xz'
             self.targetInstSrc[ver] = 'tellico-' + ver
             self.targetDigestUrls[ver] = ([f"https://tellico-project.org/files/tellico-{ver}.tar.xz.md5"], CraftHash.HashAlgorithm.MD5)
-        self.patchToApply[ver] = [("1.diff", 0)]
         self.description = "Collection management software, free and simple"
         self.displayName = "Tellico"
         self.webpage = "https://tellico-project.org/"
