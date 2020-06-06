@@ -1,0 +1,10 @@
+# blacklist
+
+# unrelated
+share/dbus-1/services/.*
+
+# Useless stuff
+share/(?!(dbus).*)
+
+# unneeded stuff from bin\
+bin/dbus-.*
