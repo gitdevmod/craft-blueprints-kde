@@ -49,5 +49,8 @@ class Package(CMakePackageBase):
         self.defines["appname"] = "tellico"
         self.defines["website"] = "https://tellico-project.org/"
         self.defines["executable"] = "bin\\tellico.exe"
+        self.ignoredPackages.append("binary/mysql")
+        
+        self.blacklist_file.append(os.path.join(self.packageDir(), 'blacklist.txt'))
         
         return TypePackager.createPackage(self)
