@@ -3,14 +3,11 @@ from Package.CMakePackageBase import *
 
 class subinfo(info.infoclass):
     def setTargets(self):
-        for ver in ['3.3.1']:
-            self.targets[ver] = 'https://tellico-project.org/files/tellico-' + ver + '.tar.xz'
-            self.targetInstSrc[ver] = 'tellico-' + ver
-            self.targetDigestUrls[ver] = ([f"https://tellico-project.org/files/tellico-{ver}.tar.xz.md5"], CraftHash.HashAlgorithm.MD5)
+        self.versionInfo.setDefaultValues()
         self.description = "Collection management software, free and simple"
         self.displayName = "Tellico"
         self.webpage = "https://tellico-project.org/"
-        self.defaultTarget = '3.3.1'
+        self.defaultTarget = 'master'
 
     def setDependencies(self):
         self.buildDependencies["virtual/base"] = None
@@ -44,11 +41,13 @@ class subinfo(info.infoclass):
 class Package(CMakePackageBase):
     def __init__(self):
         CMakePackageBase.__init__(self)
-
+        
     def createPackage(self):
         self.defines["appname"] = "tellico"
         self.defines["website"] = "https://tellico-project.org/"
         self.defines["executable"] = "bin\\tellico.exe"
+        self.defines["license"] = os.path.join(self.sourceDir(), "COPYING")
+        self.defines["icon"] = os.path.join(self.packageDir(), "tellico.ico")
         self.ignoredPackages.append("binary/mysql")
         
         self.blacklist_file.append(os.path.join(self.packageDir(), 'blacklist.txt'))
