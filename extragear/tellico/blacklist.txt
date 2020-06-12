@@ -1,5 +1,8 @@
 # blacklist
 
+# no hunspell dictionaries
+bin/data/hunspell/.*
+
 # unrelated
 share/dbus-1/services/.*
 
