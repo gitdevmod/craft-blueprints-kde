@@ -29,15 +29,13 @@ import CraftCore
 
 class subinfo(info.infoclass):
     def setTargets( self ):
-        for ver in ["2.2.12", "2.2.20"]:
-            self.targets[ver] = f"https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-{ver}.tar.bz2"
-            self.targetInstSrc[ver] = f"gnupg-{ver}"
+        for ver in ["1.1.0"]:
+            self.targets[ver] = f"https://gnupg.org/ftp/gcrypt/pinentry/pinentry-{ver}.tar.bz2"
+            self.targetInstSrc[ver] = f"pinentry-{ver}"
 
-        self.patchToApply["2.2.12"] = [("gnupg-2.2.12-20190209.diff", 1)]
-        self.targetDigests["2.2.12"] = (['db030f8b4c98640e91300d36d516f1f4f8fe09514a94ea9fc7411ee1a34082cb'], CraftHash.HashAlgorithm.SHA256)
-        self.targetDigests["2.2.20"] = (['04a7c9d48b74c399168ee8270e548588ddbe52218c337703d7f06373d326ca30'], CraftHash.HashAlgorithm.SHA256)
+        self.targetDigests["1.1.0"] = (['68076686fa724a290ea49cdf0d1c0c1500907d1b759a3bcbfbec0293e8f56570'], CraftHash.HashAlgorithm.SHA256)
 
-        self.defaultTarget = "2.2.20"
+        self.defaultTarget = "1.1.0"
 
 
     def setDependencies( self ):
@@ -45,15 +43,11 @@ class subinfo(info.infoclass):
         self.runtimeDependencies["virtual/base"] = None
         self.runtimeDependencies["libs/gpg-error"] = None
         self.runtimeDependencies["libs/assuan2"] = None
-        self.runtimeDependencies["libs/gcrypt"] = None
-        self.runtimeDependencies["libs/npth"] = None
-        self.runtimeDependencies["libs/libksba"] = None
+        self.runtimeDependencies["libs/qt5/qtbase"] = None
 
 from Package.AutoToolsPackageBase import *
 
 class Package(AutoToolsPackageBase):
     def __init__( self, **args ):
         AutoToolsPackageBase.__init__( self )
-        self.subinfo.options.configure.autoreconf = False
-        self.subinfo.options.configure.args += " --disable-doc "
-
+        self.subinfo.options.configure.args +=" --enable-pinentry-qt"
